@@ -1,3 +1,5 @@
+
+//boiler plate code to connect to the .env file and the database
 const Sequelize = require('sequelize');
 require('dotenv').config();
 
