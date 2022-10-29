@@ -30,7 +30,7 @@ router.get('/new', withAuthorization, (req, res) => {
 });
 
 
-router.get('/edit/:id', withAuthorization, async, (req, res) => {
+router.get('/edit/:id', withAuthorization, async (req, res) => {
     try{
         const postStuff = await Post.findByPk(req.params.id);
         if(postStuff){
