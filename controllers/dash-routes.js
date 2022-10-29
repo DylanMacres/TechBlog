@@ -21,3 +21,34 @@ router.get('/', withAuthorization, async (req, res) => {
         res.redirect('login')
     }
 });
+
+
+router.get('/new', withAuthorization, (req, res) => {
+    res.render('new-post', {
+        layout: 'dashboard',
+    });
+});
+
+
+router.get('/edit/:id', withAuthorization, async, (req, res) => {
+    try{
+        const postStuff = await Post.findByPk(req.params.id);
+        if(postStuff){
+            const post = postStuff.get({
+                plain: true
+            });
+            res.render('edit-post', {
+                layout: 'dashboard',
+                post,
+            });
+        } else{ 
+            res.status(420).end();
+
+        }
+    }catch(err) {
+        res.redirect('login')
+    }
+});
+
+
+module.exports = router;
