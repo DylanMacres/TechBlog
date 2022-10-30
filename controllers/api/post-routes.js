@@ -31,4 +31,26 @@ router.put('/:id', withAuthorization, async (req,res) => {
     }catch(err) {
         res.status(500).json(err);
     }
-} )
+} );
+
+
+
+router.delete('/:id', withAuthorization, async (req,res) => {
+    try{
+        const [affectedStuff] = Post.destroy({
+            where: {
+                id: req.params.id,
+            },
+        });
+        if(affectedStuff > 0 ) {
+            res.status(200).end();
+
+        }else{
+            res.status(404).end();
+        }
+    }catch(err) {
+        res.status(500).json(err);
+    }
+});
+
+module.exports = router;
