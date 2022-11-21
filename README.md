@@ -9,14 +9,14 @@ thoughts!
 The technologies used in this application are:
 
 - [Node.js](https://nodejs.org/en/)
-- [Express.js](https://expressjs.com/) to run the web server
-- [MySQL](https://www.mysql.com/) to store the data
-- [Sequelize](https://sequelize.org) as the object relational model to connect to the MySQL database from Node.js
-- [dotenv](https://www.npmjs.com/package/dotenv) to store environmental variables
-- [express-handlebars](https://www.npmjs.com/package/express-handlebars) as the templating engine
-- [express-session](https://www.npmjs.com/package/express-session) for authentication
-- [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) for using sequelize for the session store
-- [bcrypt](https://www.npmjs.com/package/bcrypt) for hashing passwords
+- [Express.js](https://expressjs.com/) 
+- [MySQL](https://www.mysql.com/) 
+- [Sequelize](https://sequelize.org)
+- [dotenv](https://www.npmjs.com/package/dotenv) 
+- [express-handlebars](https://www.npmjs.com/package/express-handlebars) 
+- [express-session](https://www.npmjs.com/package/express-session) 
+- [connect-session-sequelize](https://www.npmjs.com/package/connect-session-sequelize) 
+
 
 ### User Story
 
