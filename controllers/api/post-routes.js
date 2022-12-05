@@ -1,56 +1,52 @@
-const { Post } = require('../../models/');
-
-const withAuthorization = require('../../utils/authorization');
-
 const router = require('express').Router();
+const { Post } = require('../../models/');
+const withAuth = require('../../utils/auth');
 
+router.post('/', withAuth, async (req, res) => {
+  const body = req.body;
 
-router.post('/', withAuthorization, async (req, res) => {
-    const body = req.body;
-    try{
-        const post = await Post.create({ ...body, userId: req.session.userId });
-        res.json(post);
-    }catch(err){
-        res.status(500).json(err)
-    }
+  try {
+    const newPost = await Post.create({ ...body, userId: req.session.userId });
+    res.json(newPost);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const [affectedRows] = await Post.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
 
-router.put('/:id', withAuthorization, async (req,res) => {
-    try{
-        const [affectedStuff] = await Post.update(req.body, {
-            where: {
-                id: req.params.id,
-            },
-        });
-        if(affectedStuff > 0){
-            res.status(200).end();
-        }else {
-            res.status(404).end();
-        }
-    }catch(err) {
-        res.status(500).json(err);
+    if (affectedRows > 0) {
+      res.status(200).end();
+    } else {
+      res.status(404).end();
     }
-} );
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 
+router.delete('/:id', withAuth, async (req, res) => {
+  try {
+    const [affectedRows] = Post.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
 
-
-router.delete('/:id', withAuthorization, async (req,res) => {
-    try{
-        const [affectedStuff] = Post.destroy({
-            where: {
-                id: req.params.id,
-            },
-        });
-        if(affectedStuff > 0 ) {
-            res.status(200).end();
-
-        }else{
-            res.status(404).end();
-        }
-    }catch(err) {
-        res.status(500).json(err);
+    if (affectedRows > 0) {
+      res.status(200).end();
+    } else {
+      res.status(404).end();
     }
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;
